@@ -36,4 +36,12 @@ pipeline {
     }
   }
 }
+post {
+    success {
+      slackSend color: "good", message: "Build ${env.BUILD_NUMBER} of ${env.JOB_NAME} Succeeded. Deployed at ${LIVE_SITE}"
+    }
+    failure {
+      slackSend color: "danger", message: "Build ${env.BUILD_NUMBER} of ${env.JOB_NAME} failed. See ${env.BUILD_URL} for details."
+    }
+  }
 }
